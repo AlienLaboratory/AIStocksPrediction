@@ -1,2 +1,4 @@
 myenv
 .idea
+pywin32==308
+pywin32-ctypes==0.2.2
