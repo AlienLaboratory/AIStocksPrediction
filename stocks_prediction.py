@@ -1,12 +1,11 @@
 import streamlit as st
+from ta import trend as ta
 from datetime import date, datetime as dt, timedelta as td
-import ta.trend
 import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly
 from plotly import graph_objs as go
 import plotly.subplots as ms
-import ta
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -56,8 +55,8 @@ def load_data(ticker):
 def add_technical_indicators(data):
     
     #print(data["D"].head(50))
-    data['SMA_20'] = ta.trend.sma_indicator(data['Close'], window=20)
-    data['EMA_20'] = ta.trend.ema_indicator(data['Close'], window=20)
+    data['SMA_20'] = ta.sma_indicator(data['Close'], window=20)
+    data['EMA_20'] = ta.ema_indicator(data['Close'], window=20)
     print(data.head(50))
     return data
 
