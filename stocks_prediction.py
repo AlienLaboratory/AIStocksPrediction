@@ -57,7 +57,6 @@ def add_technical_indicators(data):
     #print(data["D"].head(50))
     data['SMA_20'] = ta.sma_indicator(data['Close'], window=20)
     data['EMA_20'] = ta.ema_indicator(data['Close'], window=20)
-    print(data.head(50))
     return data
 
 
@@ -98,22 +97,23 @@ def plot_volume_chart():
 
 if(len(chart_types)> 0 and selected_stock is not None):
     selected_chart_type = st.sidebar.selectbox('Select the type of the chart you prefer', chart_types, index=None)
-    if(selected_chart_type is not None):
-        n_years = st.sidebar.slider('Years of prediction:', 1, 10)
-        period = n_years * 365
-        with st.spinner('Wait, The data is loading......'):
+    with st.spinner('Wait, The data is loading......'):
+        if(selected_chart_type is not None):
+            n_years = st.sidebar.slider('Years of prediction:', 1, 10)
+            period = n_years * 365
             data = load_data(selected_stock)
             add_technical_indicators(data)
-        st.success("Done!")
-        if(selected_chart_type=="Candlesticks" ):    
-            plot_candlesticks()
-        elif(selected_chart_type=="Linechart" ):
-            plot_raw_data()
-        elif(selected_chart_type=="Rawdata" ):
-            st.subheader('Raw data')
-            st.write(data.tail())
-        elif(selected_chart_type=="Volume" ):
-            plot_volume_chart()
+            if(selected_chart_type=="Candlesticks" ):    
+                plot_candlesticks()
+            elif(selected_chart_type=="Linechart" ):
+                plot_raw_data()
+            elif(selected_chart_type=="Rawdata" ):
+                st.subheader('Raw data')
+                st.write(data.tail())
+            elif(selected_chart_type=="Volume" ):
+                plot_volume_chart()
+            st.success("Done!")
+    
     
     if(selected_chart_type is not None and st.sidebar.button('Generate Prediction')):
         with st.spinner('Wait for it...'):
