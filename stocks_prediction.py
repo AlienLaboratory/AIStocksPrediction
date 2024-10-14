@@ -13,7 +13,7 @@ import plotly.express as px
 #import time
 
 
-
+#git branch --set-upstream-to=origin/master master
 
 #to run this script use: python -m streamlit run stocks_prediction.py
 # Here I set time boundaries that can be specified by the user input
